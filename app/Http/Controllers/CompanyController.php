@@ -28,7 +28,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -39,7 +39,22 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = Company::create($request->only(['name']));
+
+        if (! is_null($request->input('employee1_name'))) {
+            $company->employees()->create([
+                'name' => $request->input('employee1_name'),
+                'email' => $request->input('employee1_email'),
+            ]);
+        }
+        if (! is_null($request->input('employee2_name'))) {
+            $company->employees()->create([
+                'name' => $request->input('employee2_name'),
+                'email' => $request->input('employee2_email'),
+            ]);
+        }
+
+        return to_route('companies.index');
     }
 
     /**

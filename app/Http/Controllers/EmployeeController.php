@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::select('id', 'name')
+            ->latest()
+            ->get();
+
+        return view('employees.create', ['companies' => $companies]);
     }
 
     /**
@@ -39,7 +44,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Employee::create($request->only(['name', 'email', 'company_id']));
+
+        return to_route('employees.index');
     }
 
     /**

@@ -15,7 +15,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::with('employees')
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
 
         return view('companies.index', ['companies' => $companies]);

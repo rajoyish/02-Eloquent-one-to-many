@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -28,7 +29,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.post');
     }
 
     /**
@@ -39,7 +40,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Post::find($request->input('post_id'));
+
+        $post->comments()->create([
+            'body' => $request->input('body'),
+        ]);
+
+        return to_route('comments.index');
     }
 
     /**

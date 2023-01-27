@@ -16,12 +16,35 @@
                                         {{ $post->body }}
                                     </p>
                                 </div>
+
+                                {{-- Post a Comment --}}
+                                <form action="{{ route('comments.store') }}" method="POST">
+                                    @csrf
+                                    <label for="body" class="block mb-2 font-bold dark:text-white">
+                                        Post your comments
+                                    </label>
+                                    <textarea id="body" rows="4" name="body"
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500
+                                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Write your thoughts here..."></textarea>
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <button type="submit"
+                                        class="w-32 mt-5 rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white
+                                        transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500
+                                        focus:ring-offset-2 active:bg-gray-900"
+                                        href="{{ route('posts.create') }}"> {{ __('Comment') }} </button>
+                                </form>
+                                {{-- / Post a Comment --}}
                             </div>
+
+
                         </div>
                     </section>
+
                     {{-- comments --}}
-                    <div class="mx-auto max-w-screen-sm antialiased">
-                        <h3 class="mb-4 text-lg font-semibold text-gray-900">{{ $post->comments->count() }} Comments</h3>
+                    <div class="mx-auto max-w-screen-sm">
+                        <h3 class="mb-4 text-lg font-semibold text-gray-900">{{ $post->comments->count() }} Comments
+                        </h3>
                         <div class="space-y-4">
                             @foreach ($post->comments as $comment)
                                 {{--  component comment --}}

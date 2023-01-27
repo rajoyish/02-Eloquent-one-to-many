@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 ->saveMany(Employee::factory(mt_rand(2, 5))->make());
         });
 
-        Post::factory(1000)->create()->each(function ($post) {
+        Post::factory(10)->create()->each(function ($post) {
             $post->comments()
                 ->saveMany(Comment::factory(mt_rand(2, 5))->make());
         });

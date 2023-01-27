@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PostController;
@@ -34,5 +35,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('companies', CompanyController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('posts', PostController::class);
+Route::resource('comments', CommentController::class);
 
 require __DIR__.'/auth.php';

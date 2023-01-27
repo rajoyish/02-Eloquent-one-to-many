@@ -41,8 +41,7 @@
                                 </div>
                                 {{--  / component comment --}}
                             @endforeach
-
-                        </div </div>
+                        </div>
                         {{-- Ende of Content --}}
                     </div>
                 </div>
